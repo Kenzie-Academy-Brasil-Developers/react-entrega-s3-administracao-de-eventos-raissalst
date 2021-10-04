@@ -1,5 +1,12 @@
+import BeerListDisplay from "../../components/BeerListDisplay";
+import { MainContainerBeerList } from "./style";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <MainContainerBeerList>
+      <BeerListDisplay />
+    </MainContainerBeerList>
+  );
 };
 
 export default Home;
