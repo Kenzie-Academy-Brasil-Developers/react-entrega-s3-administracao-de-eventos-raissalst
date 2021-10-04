@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   --green: #4caf50;
   --orange: #ff9800;
   --pink: #e91e63;
-  --mainFont: "Arial, Helvetica, sans-serif";
+  --mainFont: 'Roboto', sans-serif;
   
   }
 
