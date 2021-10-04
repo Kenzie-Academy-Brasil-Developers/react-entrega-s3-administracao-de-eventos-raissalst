@@ -1,5 +1,6 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
+import RoutesPath from "./routes";
 import GlobalStyle from "./styles/global";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <NavBar />
       </nav>
       <GlobalStyle />
+      <RoutesPath />
     </>
   );
 }
