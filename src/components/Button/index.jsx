@@ -19,9 +19,16 @@ const Button = ({ type, item, removeSchema }) => {
   };
 
   return (
-    <ButtonStyle removeSchema={removeSchema} onClick={handleClick}>
-      {text}
-    </ButtonStyle>
+    <>
+      {type === "catalogue" && (
+        <ButtonStyle onClick={handleClick}>{text}</ButtonStyle>
+      )}
+      {type === "cart" && (
+        <ButtonStyle removeSchema onClick={handleClick}>
+          {text}
+        </ButtonStyle>
+      )}
+    </>
   );
 };
 

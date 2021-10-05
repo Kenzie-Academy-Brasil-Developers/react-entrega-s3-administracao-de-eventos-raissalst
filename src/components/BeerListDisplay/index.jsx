@@ -18,7 +18,7 @@ const BeerListDisplay = ({ type }) => {
           <BeerCard key={beer.id} beer={beer} type={type} />
         ))}
 
-      {!!beerList &&
+      {!!cart &&
         type === "cart" &&
         cart.map((beer) => <BeerCard key={beer.id} beer={beer} type={type} />)}
     </ListContainerBeerDisplay>
