@@ -93,7 +93,7 @@ const BeerCard = ({ beer, type }) => {
         </RadioGroup>
       )}
 
-      <Button type={type} item={beer}></Button>
+      <Button type={type} item={beer} radioValue={radioValue}></Button>
     </ItemLiContainer>
   );
 };

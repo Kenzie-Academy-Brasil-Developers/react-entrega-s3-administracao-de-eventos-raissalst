@@ -1,5 +1,12 @@
+import BeerListDisplay from "../../components/BeerListDisplay";
+import { MainContainerBeerListGather } from "./style";
+
 const Gathering = () => {
-  return <div>Gathering Cart Page</div>;
+  return (
+    <MainContainerBeerListGather>
+      <BeerListDisplay type="cartGather" />
+    </MainContainerBeerListGather>
+  );
 };
 
 export default Gathering;

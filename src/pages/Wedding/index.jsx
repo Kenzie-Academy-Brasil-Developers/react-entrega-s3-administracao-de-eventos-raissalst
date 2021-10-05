@@ -1,5 +1,12 @@
+import BeerListDisplay from "../../components/BeerListDisplay";
+import { MainContainerBeerListWed } from "./style";
+
 const Wedding = () => {
-  return <div>Wedding Cart Page</div>;
+  return (
+    <MainContainerBeerListWed>
+      <BeerListDisplay type="cartWed" />
+    </MainContainerBeerListWed>
+  );
 };
 
 export default Wedding;
