@@ -4,7 +4,7 @@ import { MainContainerBeerList } from "./style";
 const Home = () => {
   return (
     <MainContainerBeerList>
-      <BeerListDisplay />
+      <BeerListDisplay type="catalogue" />
     </MainContainerBeerList>
   );
 };

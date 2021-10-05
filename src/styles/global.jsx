@@ -29,5 +29,6 @@ const GlobalStyle = createGlobalStyle`
       color: var(--letterColorBody);
       font: 1rem var(--mainFont);
   }
+
 `;
 export default GlobalStyle;
