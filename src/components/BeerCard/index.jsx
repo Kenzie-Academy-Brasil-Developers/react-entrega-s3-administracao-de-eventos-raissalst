@@ -1,10 +1,7 @@
 import { ItemLiContainer } from "./style";
-// import { useDispatch } from "react-redux";
-// import Buttons from "../Buttons";
+import Button from "../Button";
 
-const BeerCard = ({ beer /*isRemovable = false*/ }) => {
-  // const dispatch = useDispatch();
-
+const BeerCard = ({ beer, type }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
 
   return (
@@ -14,15 +11,7 @@ const BeerCard = ({ beer /*isRemovable = false*/ }) => {
       <h4>
         <span>Início de Fabricação:</span> {first_brewed}
       </h4>
-      {/* {isRemovable ? (
-        <Buttons removeSchema onClick={() => dispatch(removeFromCartThunk(id))}>
-          Remover do carrinho
-        </Buttons>
-      ) : (
-        <Buttons onClick={() => dispatch(addToCartThunk(product))}>
-          Adicionar ao carrinho
-        </Buttons>
-      )} */}
+      <Button type={type} item={beer}></Button>
     </ItemLiContainer>
   );
 };

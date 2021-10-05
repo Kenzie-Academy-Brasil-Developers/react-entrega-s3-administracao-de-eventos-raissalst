@@ -1,5 +1,12 @@
+import BeerListDisplay from "../../components/BeerListDisplay";
+import { MainContainerBeerListGrad } from "./style";
+
 const Graduation = () => {
-  return <div>Graduation Cart Page</div>;
+  return (
+    <MainContainerBeerListGrad>
+      <BeerListDisplay type="cart" />
+    </MainContainerBeerListGrad>
+  );
 };
 
 export default Graduation;

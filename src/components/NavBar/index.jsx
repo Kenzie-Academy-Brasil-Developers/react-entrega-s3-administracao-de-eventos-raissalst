@@ -3,6 +3,9 @@ import { Toolbar } from "@material-ui/core";
 import { MenuItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useHistory } from "react-router";
+import { FaGraduationCap } from "react-icons/fa";
+import { GiLovers } from "react-icons/gi";
+import { GiPartyPopper } from "react-icons/gi";
 
 const useStyles = makeStyles(() => ({
   appbar: {
@@ -25,9 +28,15 @@ const NavBar = () => {
     <AppBar className={classes.appbar} position="static">
       <Toolbar>
         <MenuItem onClick={() => sendTo("/")}>Home</MenuItem>
-        <MenuItem onClick={() => sendTo("/graduation")}>Graduation</MenuItem>
-        <MenuItem onClick={() => sendTo("/wedding")}>Wedding</MenuItem>
-        <MenuItem onClick={() => sendTo("/gathering")}>Gathering</MenuItem>
+        <MenuItem onClick={() => sendTo("/graduation")}>
+          <FaGraduationCap />
+        </MenuItem>
+        <MenuItem onClick={() => sendTo("/wedding")}>
+          <GiLovers />
+        </MenuItem>
+        <MenuItem onClick={() => sendTo("/gathering")}>
+          <GiPartyPopper />
+        </MenuItem>
       </Toolbar>
     </AppBar>
   );
