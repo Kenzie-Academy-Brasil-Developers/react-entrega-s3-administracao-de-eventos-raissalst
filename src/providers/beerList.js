@@ -14,7 +14,7 @@ export const BeerListProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  console.log("beerList no provider beer", beerList);
+  // console.log("beerList no provider beer", beerList);
 
   useEffect(() => {
     getBeerList();

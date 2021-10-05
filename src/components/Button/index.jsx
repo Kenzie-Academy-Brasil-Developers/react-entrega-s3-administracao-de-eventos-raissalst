@@ -3,8 +3,8 @@ import { CartContext } from "../../providers/cart";
 // import { BeerListContext } from "../../providers/beerList";
 import { ButtonStyle } from "./style";
 
-const Button = ({ type, item, removeSchema }) => {
-  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+const Button = ({ type, item, radioValue }) => {
+  const { addToCart, removeFromCart } = useContext(CartContext);
 
   //   const { beerList } = useContext(BeerListContext); //lista de cervejas que vem da API recebida aqui
 
@@ -12,16 +12,23 @@ const Button = ({ type, item, removeSchema }) => {
 
   const handleClick = () => {
     if (type === "catalogue") {
-      addToCart(item);
+      addToCart(item, radioValue);
     } else {
-      removeFromCart(item);
+      removeFromCart(item, type);
     }
   };
 
   return (
-    <ButtonStyle removeSchema={removeSchema} onClick={handleClick}>
-      {text}
-    </ButtonStyle>
+    <>
+      {type === "catalogue" && (
+        <ButtonStyle onClick={handleClick}>{text}</ButtonStyle>
+      )}
+      {type !== "catalogue" && (
+        <ButtonStyle removeSchema onClick={handleClick}>
+          {text}
+        </ButtonStyle>
+      )}
+    </>
   );
 };
 
