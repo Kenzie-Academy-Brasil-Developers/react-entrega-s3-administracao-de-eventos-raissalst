@@ -1,25 +1,27 @@
 import { ItemLiContainer } from "./style";
 import Button from "../Button";
 import Box from "@material-ui/core/Box";
-// import { ClickAwayListener } from "@material-ui/core";
 import { useState } from "react";
-import { Modal } from "@material-ui/core";
+import { Modal, Radio } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { RadioGroup } from "@material-ui/core";
+import { FormControlLabel } from "@material-ui/core";
 
 const BeerCard = ({ beer, type }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
   const [open, setOpen] = useState(false);
-
-  // const handleClickOpenDescrip = () => {
-  //   setOpen((prev) => !prev);
-  // };
+  const [radioValue, setRadioValue] = useState("");
 
   const handleClickOpenDescrip = () => {
     setOpen(true);
   };
   const handleClickCloseDescrip = () => {
     setOpen(false);
+  };
+
+  const handleChange = (e) => {
+    setRadioValue(e.target.value);
   };
 
   const useStyles = makeStyles(() => ({
@@ -39,19 +41,24 @@ const BeerCard = ({ beer, type }) => {
     },
   }));
 
+  console.log("state do radio", radioValue);
   const classes = useStyles();
 
   return (
     <ItemLiContainer>
       <h3>{name}</h3>
       <img src={image_url} alt={name} />
-      <h4>
-        <span>1ª Fabricação:</span> {first_brewed}
-      </h4>
+      {type === "catalogue" && (
+        <h4>
+          <span>1ª Fabricação:</span> {first_brewed}
+        </h4>
+      )}
       <h4>Qtdade: {volume.value}L</h4>
-      <p className="beerDescription" onClick={handleClickOpenDescrip}>
-        Descrição
-      </p>
+      {type === "catalogue" && (
+        <p className="beerDescription" onClick={handleClickOpenDescrip}>
+          Descrição
+        </p>
+      )}
       <Modal open={open} onClose={handleClickCloseDescrip}>
         <Box className={classes.box}>
           <Typography variant="h6" component="h2">
@@ -60,6 +67,32 @@ const BeerCard = ({ beer, type }) => {
           <Typography className={classes.textMain}>{description}</Typography>
         </Box>
       </Modal>
+
+      {type === "catalogue" && (
+        <RadioGroup
+          row
+          name="radioGroup"
+          value={radioValue}
+          onChange={handleChange}
+        >
+          <FormControlLabel
+            value="Graduation"
+            control={<Radio size="small" />}
+            label="Formatura"
+          />
+          <FormControlLabel
+            value="Wedding"
+            control={<Radio size="small" />}
+            label="Casamento"
+          />
+          <FormControlLabel
+            value="Gathering"
+            control={<Radio size="small" />}
+            label="Confraternização"
+          />
+        </RadioGroup>
+      )}
+
       <Button type={type} item={beer}></Button>
     </ItemLiContainer>
   );

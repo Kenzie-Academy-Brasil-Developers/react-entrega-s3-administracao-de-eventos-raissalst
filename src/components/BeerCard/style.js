@@ -8,7 +8,7 @@ export const ItemLiContainer = styled.li`
   box-shadow: 0px 0px 10px 4px #0000007d;
   padding: 10px 10px 20px;
   max-height: 550px;
-  min-width: 200px;
+  min-width: 235px;
   font-size: 22px;
 
   h3 {
