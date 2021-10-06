@@ -18,6 +18,7 @@ export const ItemLiContainer = styled.li`
   h3 {
     font-size: 24px;
     margin-bottom: 3px;
+    min-height: 50px;
   }
 
   h4 {
