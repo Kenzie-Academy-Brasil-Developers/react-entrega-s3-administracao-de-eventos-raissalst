@@ -19,8 +19,10 @@ const GlobalStyle = createGlobalStyle`
   --gray: #ccc;
   --green: #4caf50;
   --orange: #ff9800;
+  --beer: #f6c101;
   --pink: #e91e63;
   --mainFont: 'Roboto', sans-serif;
+  --titleFont: 'Lobster', cursive;
   
   }
 

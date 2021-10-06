@@ -5,5 +5,5 @@ export const ListContainerBeerDisplay = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 70%;
+  max-width: 75%;
 `;

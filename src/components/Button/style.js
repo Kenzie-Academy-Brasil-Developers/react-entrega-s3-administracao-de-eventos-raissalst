@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const ButtonStyle = styled.button`
-  background: ${(props) => (props.removeSchema ? "#e91e63" : "#4caf50")};
+  background: ${(props) => (props.removeSchema ? "#e91e63" : "#f6c101")};
   /* background-color: #4caf50; */
   font-size: 17px;
-  color: #fff;
+  color: #000;
   border: none;
   border-radius: 5px;
   padding: 10px 40px;
