@@ -7,6 +7,10 @@ import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { RadioGroup } from "@material-ui/core";
 import { FormControlLabel } from "@material-ui/core";
+import { GiClick } from "react-icons/gi";
+import { GiLovers } from "react-icons/gi";
+import { FaGraduationCap } from "react-icons/fa";
+import { GiPartyPopper } from "react-icons/gi";
 
 const BeerCard = ({ beer, type }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
@@ -39,6 +43,11 @@ const BeerCard = ({ beer, type }) => {
     textMain: {
       marginTop: 5,
     },
+    radioGroup: {
+      border: "1px solid blue",
+      textAlign: "center",
+      justifyContent: "center",
+    },
   }));
 
   console.log("state do radio", radioValue);
@@ -56,7 +65,7 @@ const BeerCard = ({ beer, type }) => {
       <h4>Qtdade: {volume.value}L</h4>
       {type === "catalogue" && (
         <p className="beerDescription" onClick={handleClickOpenDescrip}>
-          Descrição
+          Descrição <GiClick />
         </p>
       )}
       <Modal open={open} onClose={handleClickCloseDescrip}>
@@ -74,21 +83,22 @@ const BeerCard = ({ beer, type }) => {
           name="radioGroup"
           value={radioValue}
           onChange={handleChange}
+          className={classes.radioGroup}
         >
           <FormControlLabel
             value="Graduation"
             control={<Radio size="small" />}
-            label="Formatura"
+            label={<FaGraduationCap />}
           />
           <FormControlLabel
             value="Wedding"
             control={<Radio size="small" />}
-            label="Casamento"
+            label={<GiLovers />}
           />
           <FormControlLabel
             value="Gathering"
             control={<Radio size="small" />}
-            label="Confraternização"
+            label={<GiPartyPopper />}
           />
         </RadioGroup>
       )}

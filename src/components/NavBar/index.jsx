@@ -9,9 +9,9 @@ import { GiPartyPopper } from "react-icons/gi";
 
 const useStyles = makeStyles(() => ({
   appbar: {
-    backgroundColor: "var(--blue)",
+    backgroundColor: "#000",
     fontFamily: "var(--mainFont)",
-    color: "#ffffff",
+    color: "var(--orange)",
   },
 }));
 
