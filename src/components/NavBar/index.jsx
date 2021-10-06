@@ -25,20 +25,23 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar className={classes.appbar} position="static">
-      <Toolbar>
-        <MenuItem onClick={() => sendTo("/")}>Home</MenuItem>
-        <MenuItem onClick={() => sendTo("/graduation")}>
-          <FaGraduationCap />
-        </MenuItem>
-        <MenuItem onClick={() => sendTo("/wedding")}>
-          <GiLovers />
-        </MenuItem>
-        <MenuItem onClick={() => sendTo("/gathering")}>
-          <GiPartyPopper />
-        </MenuItem>
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar className={classes.appbar} position="fixed">
+        <Toolbar>
+          <MenuItem onClick={() => sendTo("/")}>Home</MenuItem>
+          <MenuItem onClick={() => sendTo("/graduation")}>
+            <FaGraduationCap />
+          </MenuItem>
+          <MenuItem onClick={() => sendTo("/wedding")}>
+            <GiLovers />
+          </MenuItem>
+          <MenuItem onClick={() => sendTo("/gathering")}>
+            <GiPartyPopper />
+          </MenuItem>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+    </>
   );
 };
 

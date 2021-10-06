@@ -12,7 +12,7 @@ import { GiLovers } from "react-icons/gi";
 import { FaGraduationCap } from "react-icons/fa";
 import { GiPartyPopper } from "react-icons/gi";
 
-const BeerCard = ({ beer, type, qtityGrad }) => {
+const BeerCard = ({ beer, type, qtityGrad, qtityWed }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
   const [open, setOpen] = useState(false);
   const [radioValue, setRadioValue] = useState("");
@@ -66,6 +66,11 @@ const BeerCard = ({ beer, type, qtityGrad }) => {
       {type === "cart" && (
         <h4>
           Qtdade: {qtityGrad} x {volume.value}L
+        </h4>
+      )}
+      {type === "cartWed" && (
+        <h4>
+          Qtdade: {qtityWed} x {volume.value}L
         </h4>
       )}
 
