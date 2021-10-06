@@ -50,7 +50,7 @@ const BeerCard = ({ beer, type, qtityGrad, qtityWed, qtityGather }) => {
     },
   }));
 
-  console.log("state do radio", radioValue);
+  // console.log("state do radio", radioValue);
   const classes = useStyles();
 
   return (
