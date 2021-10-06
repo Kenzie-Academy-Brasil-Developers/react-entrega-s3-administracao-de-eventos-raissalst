@@ -10,6 +10,8 @@ const BeerListDisplay = ({
   qtityGrad,
   arrayWed,
   qtityWed,
+  arrayGather,
+  qtityGather,
 }) => {
   const { beerList } = useContext(BeerListContext);
   const { cart, cartWed, cartGather } = useContext(CartContext);
@@ -46,8 +48,13 @@ const BeerListDisplay = ({
 
       {!!cartGather &&
         type === "cartGather" &&
-        cartGather.map((beer, index) => (
-          <BeerCard key={index} beer={beer} type={type} />
+        arrayGather.map((beer, index) => (
+          <BeerCard
+            key={index}
+            beer={beer}
+            type={type}
+            qtityGather={qtityGather[beer.id]}
+          />
         ))}
     </ListContainerBeerDisplay>
   );

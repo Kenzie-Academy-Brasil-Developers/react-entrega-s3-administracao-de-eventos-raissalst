@@ -46,7 +46,6 @@ const Graduation = () => {
     newArraySortedGrad = cart.sort((a, b) => {
       return a.id - b.id;
     });
-    console.log("array sortido", newArraySortedGrad);
 
     newArrayFilteredGrad = [newArraySortedGrad[0]];
     let aux = "";
@@ -58,8 +57,6 @@ const Graduation = () => {
       }
     }
 
-    console.log("array filtrado", newArrayFilteredGrad);
-
     cart.forEach((item) => {
       if (idVolumesOfBeerGrad[item.id] === undefined) {
         return (idVolumesOfBeerGrad[item.id] = 1);
@@ -68,8 +65,6 @@ const Graduation = () => {
           idVolumesOfBeerGrad[item.id] + 1);
       }
     });
-
-    console.log("ids no grad", idVolumesOfBeerGrad);
   }
 
   return (
