@@ -15,6 +15,10 @@ export const HeaderContainerHome = styled.header`
   background-image: url("https://cdn.pixabay.com/photo/2014/01/28/15/08/beer-253791_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  padding-bottom: 20px;
+  -webkit-box-shadow: 0px 0px 10px 4px #0000007d;
+  box-shadow: 0px 0px 10px 4px #0000007d;
+
   h1 {
     font-size: 40px;
     text-align: center;

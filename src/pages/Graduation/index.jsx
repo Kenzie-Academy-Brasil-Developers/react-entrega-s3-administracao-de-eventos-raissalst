@@ -104,13 +104,16 @@ const Graduation = () => {
                   </TableCell>
                 </TableRow>
               ))}
+              <TableRow>
+                <TableCell className={classes.footer}>Total (L)</TableCell>
+                <TableCell className={classes.footer} align="right">
+                  {idVolumesOfBeerGrad.reduce(
+                    (acc, item) => acc + item * 20,
+                    0
+                  )}
+                </TableCell>
+              </TableRow>
             </TableBody>
-            <TableRow>
-              <TableCell className={classes.footer}>Total (L)</TableCell>
-              <TableCell className={classes.footer} align="right">
-                {idVolumesOfBeerGrad.reduce((acc, item) => acc + item * 20, 0)}
-              </TableCell>
-            </TableRow>
           </Table>
         )}
       </ContainerTableGrad>

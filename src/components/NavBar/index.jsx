@@ -13,6 +13,10 @@ const useStyles = makeStyles(() => ({
     fontFamily: "var(--mainFont)",
     color: "var(--orange)",
   },
+  item: {
+    fontSize: "17px",
+    "@media (min-width: 1024px)": { fontSize: "19px" },
+  },
 }));
 
 const NavBar = () => {
@@ -28,14 +32,22 @@ const NavBar = () => {
     <>
       <AppBar className={classes.appbar} position="fixed">
         <Toolbar>
-          <MenuItem onClick={() => sendTo("/")}>Home</MenuItem>
-          <MenuItem onClick={() => sendTo("/graduation")}>
+          <MenuItem className={classes.item} onClick={() => sendTo("/")}>
+            Home
+          </MenuItem>
+          <MenuItem
+            className={classes.item}
+            onClick={() => sendTo("/graduation")}
+          >
             <FaGraduationCap />
           </MenuItem>
-          <MenuItem onClick={() => sendTo("/wedding")}>
+          <MenuItem className={classes.item} onClick={() => sendTo("/wedding")}>
             <GiLovers />
           </MenuItem>
-          <MenuItem onClick={() => sendTo("/gathering")}>
+          <MenuItem
+            className={classes.item}
+            onClick={() => sendTo("/gathering")}
+          >
             <GiPartyPopper />
           </MenuItem>
         </Toolbar>
