@@ -11,7 +11,6 @@ export const MainContainerBeerListWed = styled.div`
 `;
 
 export const HeaderContainerWed = styled.header`
-  /* border: 1px solid red; */
   background-image: url("https://cdn.pixabay.com/photo/2016/11/21/15/58/wedding-1846114_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,7 +35,6 @@ export const HeaderContainerWed = styled.header`
 `;
 
 export const ContainerTableWed = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;

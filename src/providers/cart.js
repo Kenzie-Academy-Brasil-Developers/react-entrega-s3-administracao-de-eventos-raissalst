@@ -43,10 +43,6 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // console.log("cart de grad no provider cart", cart);
-  // console.log("cart de wed no provider cart", cartWed);
-  // console.log("cart de gather no provider cart", cartGather);
-
   return (
     <CartContext.Provider
       value={{ cart, cartWed, cartGather, addToCart, removeFromCart }}

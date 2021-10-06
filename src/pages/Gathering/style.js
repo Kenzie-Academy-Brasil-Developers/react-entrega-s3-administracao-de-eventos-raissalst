@@ -11,7 +11,6 @@ export const MainContainerBeerListGather = styled.div`
 `;
 
 export const HeaderContainerGather = styled.header`
-  /* border: 1px solid red; */
   background-image: url("https://cdn.pixabay.com/photo/2017/07/21/23/57/concert-2527495_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,7 +35,6 @@ export const HeaderContainerGather = styled.header`
 `;
 
 export const ContainerTableGather = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;

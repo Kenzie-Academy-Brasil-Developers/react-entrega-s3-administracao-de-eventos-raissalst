@@ -11,7 +11,6 @@ export const MainContainerBeerList = styled.div`
 `;
 
 export const HeaderContainerHome = styled.header`
-  /* border: 1px solid red; */
   background-image: url("https://cdn.pixabay.com/photo/2014/01/28/15/08/beer-253791_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,7 +41,6 @@ export const HeaderContainerHome = styled.header`
   }
 
   h5 {
-    /* border: 1px solid blue; */
     font-size: 18px;
     min-width: 100px;
     max-width: 120px;

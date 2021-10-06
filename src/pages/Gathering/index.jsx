@@ -16,7 +16,6 @@ import { CartContext } from "../../providers/cart";
 const Gathering = () => {
   const useStyles = makeStyles(() => ({
     table: {
-      // backgroundColor: "#000",
       fontFamily: "var(--mainFont)",
       color: "var(--orange)",
       minWidth: "250px",

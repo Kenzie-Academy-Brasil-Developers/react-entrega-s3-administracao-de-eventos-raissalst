@@ -7,10 +7,3 @@ export const ListContainerBeerDisplay = styled.ul`
   justify-content: space-between;
   max-width: 75%;
 `;
-
-export const ContainerTableDisplay = styled.div`
-  border: 1px solid red;
-
-  h5 {
-  }
-`;

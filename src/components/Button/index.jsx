@@ -1,12 +1,9 @@
 import { useContext } from "react";
 import { CartContext } from "../../providers/cart";
-// import { BeerListContext } from "../../providers/beerList";
 import { ButtonStyle } from "./style";
 
 const Button = ({ type, item, radioValue }) => {
   const { addToCart, removeFromCart } = useContext(CartContext);
-
-  //   const { beerList } = useContext(BeerListContext); //lista de cervejas que vem da API recebida aqui
 
   const text = type === "catalogue" ? "Add to event" : "Remove from event";
 

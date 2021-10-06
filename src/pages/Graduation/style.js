@@ -11,7 +11,6 @@ export const MainContainerBeerListGrad = styled.div`
 `;
 
 export const HeaderContainerGrad = styled.header`
-  /* border: 1px solid red; */
   background-image: url("https://cdn.pixabay.com/photo/2018/05/26/06/46/graduation-cap-3430714_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,7 +35,6 @@ export const HeaderContainerGrad = styled.header`
 `;
 
 export const ContainerTableGrad = styled.div`
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;

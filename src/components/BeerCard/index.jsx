@@ -44,7 +44,6 @@ const BeerCard = ({ beer, type, qtityGrad, qtityWed, qtityGather }) => {
       marginTop: 5,
     },
     radioGroup: {
-      // border: "1px solid blue",
       textAlign: "center",
       justifyContent: "center",
     },
