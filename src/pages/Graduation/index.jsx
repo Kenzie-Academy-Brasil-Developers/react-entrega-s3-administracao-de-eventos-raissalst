@@ -9,11 +9,9 @@ import { TableBody } from "@material-ui/core";
 import { TableCell } from "@material-ui/core";
 import { TableHead } from "@material-ui/core";
 import { TableRow } from "@material-ui/core";
-import { TableCellClassKey } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useContext } from "react";
 import { CartContext } from "../../providers/cart";
-import { ItemLiContainer } from "../../components/BeerCard/style";
 
 const Graduation = () => {
   const useStyles = makeStyles(() => ({

@@ -11,7 +11,7 @@ export const MainContainerBeerListGrad = styled.div`
 `;
 
 export const HeaderContainerGrad = styled.header`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-image: url("https://cdn.pixabay.com/photo/2018/05/26/06/46/graduation-cap-3430714_960_720.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -33,40 +33,10 @@ export const HeaderContainerGrad = styled.header`
       font-size: 60px;
     }
   }
-
-  /* h3 {
-    font-size: 20px;
-    text-align: center;
-    padding: 10px 20px;
-    font-style: italic;
-
-    @media screen and (min-width: 768px) {
-      font-size: 25px;
-    }
-  }
-
-  h5 {
-    border: 1px solid blue;
-    font-size: 18px;
-    min-width: 100px;
-    max-width: 120px;
-    text-align: center;
-
-    @media screen and (min-width: 768px) {
-      font-size: 20px;
-    }
-  }
-
-  div {
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    max-width: 45%;
-  } */
 `;
 
 export const ContainerTableGrad = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   justify-content: center;
