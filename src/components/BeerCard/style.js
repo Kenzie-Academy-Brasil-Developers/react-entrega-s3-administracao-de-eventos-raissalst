@@ -38,10 +38,11 @@ export const ItemLiContainer = styled.li`
   .beerDescription {
     font-size: 16px;
     cursor: pointer;
-    border: 1px solid var(--orange);
+    border: 2px solid #0000007d;
     line-height: 1;
     padding: 2px 0;
     width: 100%;
     text-align: center;
+    background-color: rgba(255, 152, 0, 0.8);
   }
 `;
