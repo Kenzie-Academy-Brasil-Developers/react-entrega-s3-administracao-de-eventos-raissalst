@@ -38,7 +38,7 @@ export const HeaderContainerHome = styled.header`
   }
 
   h5 {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     font-size: 18px;
     min-width: 100px;
     max-width: 120px;

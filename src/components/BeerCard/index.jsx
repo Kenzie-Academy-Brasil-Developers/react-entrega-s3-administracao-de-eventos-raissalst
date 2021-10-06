@@ -12,7 +12,7 @@ import { GiLovers } from "react-icons/gi";
 import { FaGraduationCap } from "react-icons/fa";
 import { GiPartyPopper } from "react-icons/gi";
 
-const BeerCard = ({ beer, type }) => {
+const BeerCard = ({ beer, type, qtityGrad }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
   const [open, setOpen] = useState(false);
   const [radioValue, setRadioValue] = useState("");
@@ -44,7 +44,7 @@ const BeerCard = ({ beer, type }) => {
       marginTop: 5,
     },
     radioGroup: {
-      border: "1px solid blue",
+      // border: "1px solid blue",
       textAlign: "center",
       justifyContent: "center",
     },
@@ -62,7 +62,13 @@ const BeerCard = ({ beer, type }) => {
           <span>1ª Fabricação:</span> {first_brewed}
         </h4>
       )}
-      <h4>Qtdade: {volume.value}L</h4>
+      {type === "catalogue" && <h4>Qtdade: {volume.value}L</h4>}
+      {type === "cart" && (
+        <h4>
+          Qtdade: {qtityGrad} x {volume.value}L
+        </h4>
+      )}
+
       {type === "catalogue" && (
         <p className="beerDescription" onClick={handleClickOpenDescrip}>
           Descrição <GiClick />
