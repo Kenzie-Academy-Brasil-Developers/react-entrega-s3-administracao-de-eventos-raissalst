@@ -28,10 +28,12 @@ export const CartProvider = ({ children }) => {
   };
 
   const filteringArray = (array) => {
+    // console.log("array na funcao", array);
     let newSorted = [];
     newSorted = array.sort((a, b) => {
       return a.id - b.id;
     });
+    // console.log("new sorted", newSorted);
     let newFiltered = [newSorted[0]];
     let aux = "";
     for (let i = 1; i < newSorted.length; i++) {
@@ -40,24 +42,22 @@ export const CartProvider = ({ children }) => {
         newFiltered.push(newSorted[i]);
       }
     }
-    return newFiltered;
+    // console.log("new filtered na funcao", newFiltered);
+    return newFiltered[0] ? newFiltered : [];
   };
 
   let newArrayAuxCart = [];
 
   const addToCart = (item, radioValue) => {
+    // console.log(item);
     if (radioValue === "Graduation") {
       setCart([...cart, item]);
+      item.quantity = item.quantity + 1;
       newArrayAuxCart = [...cart, item];
-      // console.log("newArrayAuxCart", newArrayAuxCart);
-      //let bool = newArrayAuxCart.some((beer) => beer.id === item.id); //se for true já existe a cerveja lá repetida. Se for false ela não existe.
-      //let findElem = newArrayAuxCart.find((beer) => beer.id === item.id);
-      //console.log("bool", bool);
-      //console.log("find element", findElem);
       if (newArrayAuxCart.length !== 0) {
         setCartFiltered(filteringArray(newArrayAuxCart));
       }
-      console.log("new array no add to cart", newArrayAuxCart);
+      // console.log("new array no add to cart", newArrayAuxCart);
       setCartVolume(createArrayOfBeerVolume(newArrayAuxCart));
     }
 
@@ -71,17 +71,17 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (item, type) => {
+    // console.log("type no remove", type);
     if (type === "cart") {
       const newCart = cart.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
       setCart(newCart);
       setCartFiltered(filteringArray(newCart));
-      console.log("new cart dentro do remove", newCart);
+      // console.log("new cart dentro do remove", newCart);
 
       setCartVolume(createArrayOfBeerVolume(newCart));
     }
-    console.log("cart embaixo do remove", cart);
 
     if (type === "cartWed") {
       const newCartWed = cartWed.filter(
@@ -98,17 +98,23 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // if (cart.length !== 0) {
-  //   setCartVolume(createArrayOfBeerVolume(cart));
-  // }
-  // if (cartWed.length !== 0) {
-  //   setCartWedVolume(createArrayOfBeerVolume(cartWed));
-  // }
-  // if (cartGather.length !== 0) {
-  //   setCartGatherVolume(createArrayOfBeerVolume(cartGather));
-  // }
+  //função para adicionar +1 no carrinho
 
-  console.log("cart de volume no provider", cartVolume);
+  // const addUnitBeerToCart = (item) => {
+  //   return (item.quantity = item.quantity + 1);
+  // };
+
+  //função para diminuir itens no carrinho
+  const subtractFromBeerCart = (item, type) => {
+    console.log("type no remove", type);
+    item.quantity = item.quantity - 1;
+    if (item.quantity === 0) {
+      removeFromCart(item, type);
+    } else {
+      setCartFiltered([...cartFiltered]);
+    }
+  };
+  // console.log("cart de volume no provider", cartVolume);
   // console.log("cart sem filtro no provider", cart);
   // console.log("cart com filtro no provider", cartFiltered);
 
@@ -122,6 +128,8 @@ export const CartProvider = ({ children }) => {
         cartGather,
         addToCart,
         removeFromCart,
+        subtractFromBeerCart,
+        // addUnitBeerToCart,
       }}
     >
       {children}

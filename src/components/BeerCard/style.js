@@ -46,4 +46,35 @@ export const ItemLiContainer = styled.li`
     text-align: center;
     background-color: rgba(255, 152, 0, 0.8);
   }
+
+  .counterContainer {
+    margin: 0 auto;
+    direction: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 25px;
+    /* border: 1px solid red; */
+    line-height: 1;
+  }
+
+  .counterContainer button {
+    padding: 0;
+    border-radius: 100%;
+    background-color: #ccc;
+    color: #000;
+    min-width: 25px;
+    min-height: 25px;
+    max-height: 25px;
+    max-width: 25px;
+    margin: 0;
+  }
+
+  .counterContainer p {
+    display: inline;
+    padding: 0px 20px;
+    height: 25px;
+  }
 `;

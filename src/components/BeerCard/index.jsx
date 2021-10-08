@@ -1,18 +1,18 @@
-import { ItemLiContainer } from "./style";
 import Button from "../Button";
-import Box from "@material-ui/core/Box";
-import { useState } from "react";
-import { Modal, Radio } from "@material-ui/core";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
-import { RadioGroup } from "@material-ui/core";
-import { FormControlLabel } from "@material-ui/core";
-import { GiClick } from "react-icons/gi";
-import { GiLovers } from "react-icons/gi";
-import { FaGraduationCap } from "react-icons/fa";
-import { GiPartyPopper } from "react-icons/gi";
+import { useState, useContext } from "react";
 import { CartContext } from "../../providers/cart";
-import { useContext } from "react";
+import { ItemLiContainer } from "./style";
+import Box from "@material-ui/core/Box";
+import {
+  Modal,
+  Radio,
+  Typography,
+  RadioGroup,
+  FormControlLabel,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import { GiClick, GiLovers, GiPartyPopper } from "react-icons/gi";
+import { FaGraduationCap } from "react-icons/fa";
 
 const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
@@ -66,9 +66,19 @@ const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
       )}
       {type === "catalogue" && <h4>Qtdade: {volume.value}L</h4>}
       {type === "cart" && (
-        <h4>
-          Qtdade: {cartVolume[id]} x {volume.value}L
-        </h4>
+        // <h4>
+        //   Qtdade: {cartVolume[id]} x {volume.value}L
+        // </h4>
+        <div className="counterContainer">
+          <Button type={type} item={beer} typeSumSub={"sub"}>
+            -
+          </Button>
+
+          <p>{beer.quantity}</p>
+          <Button type={type} item={beer} typeSumSub={"add"}>
+            +
+          </Button>
+        </div>
       )}
       {type === "cartWed" && (
         <h4>

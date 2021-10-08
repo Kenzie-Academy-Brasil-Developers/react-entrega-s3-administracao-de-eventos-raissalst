@@ -9,9 +9,13 @@ export const BeerListProvider = ({ children }) => {
   const getBeerList = () => {
     axios
       .get("https://api.punkapi.com/v2/beers")
-      .then((res) => setBeerList(res.data))
+      .then((res) => {
+        res.data.map((item) => (item.quantity = 0));
+        setBeerList(res.data);
+      })
       .catch((err) => console.log(err));
   };
+  // console.log("beer", beerList);
 
   useEffect(() => {
     getBeerList();
