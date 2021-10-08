@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
+import toast from "react-hot-toast";
 export const CartContext = createContext([]);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [cartWed, setCartWed] = useState([]);
   const [cartGather, setCartGather] = useState([]);
-
   const [cartFiltered, setCartFiltered] = useState([]);
   // const [cartWedFiltered, setCartWedFiltered] = useState([]);
   // const [cartGatherFiltered, setCartGatherFiltered] = useState([]);
@@ -13,6 +13,9 @@ export const CartProvider = ({ children }) => {
   const [cartVolume, setCartVolume] = useState([]);
   // const [cartWedVolume, setCartWedVolume] = useState([]);
   // const [cartGatherVolume, setCartGatherVolume] = useState([]);
+
+  // const [addMessage, setAddMessage] = useState(false);
+  const notifyAdd = () => toast.success("Produto adicionado com sucesso!");
 
   const createArrayOfBeerVolume = (array) => {
     let auxArray = [];
@@ -23,7 +26,7 @@ export const CartProvider = ({ children }) => {
         return (auxArray[item.id] = auxArray[item.id] + 1);
       }
     });
-    console.log("aux array no volume", auxArray);
+    // console.log("aux array no volume", auxArray);
     return auxArray;
   };
 
@@ -59,6 +62,10 @@ export const CartProvider = ({ children }) => {
       }
       // console.log("new array no add to cart", newArrayAuxCart);
       setCartVolume(createArrayOfBeerVolume(newArrayAuxCart));
+      // setAddMessage(true);
+      // setTimeout(() => {
+      //   setAddMessage(false);
+      // }, 500);
     }
 
     if (radioValue === "Wedding") {
@@ -136,6 +143,9 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         subtractFromBeerCart,
         addUnitBeerToCart,
+        notifyAdd,
+        // setAddMessage,
+        // addMessage,
       }}
     >
       {children}

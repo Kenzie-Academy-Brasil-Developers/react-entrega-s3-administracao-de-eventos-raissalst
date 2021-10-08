@@ -1,9 +1,9 @@
 import BeerListDisplay from "../../components/BeerListDisplay";
 import { HeaderContainerHome, MainContainerBeerList } from "./style";
-import { GiLovers } from "react-icons/gi";
+import { GiLovers, GiPartyPopper } from "react-icons/gi";
 import { FaGraduationCap } from "react-icons/fa";
-import { GiPartyPopper } from "react-icons/gi";
 import { makeStyles } from "@material-ui/styles";
+import { Toaster } from "react-hot-toast";
 
 const useStyles = makeStyles(() => ({
   icon: {
@@ -14,6 +14,7 @@ const useStyles = makeStyles(() => ({
 
 const Home = () => {
   const classes = useStyles();
+
   return (
     <>
       <HeaderContainerHome>
@@ -36,6 +37,18 @@ const Home = () => {
             <GiPartyPopper className={classes.icon} />
           </h5>
         </div>
+
+        <Toaster
+          toastOptions={{
+            success: {
+              style: {
+                background: "green",
+                minWidth: "200px",
+                fontWeight: "bold",
+              },
+            },
+          }}
+        />
       </HeaderContainerHome>
       <MainContainerBeerList>
         <BeerListDisplay type="catalogue" />
