@@ -3,7 +3,7 @@ import { CartContext } from "../../providers/cart";
 import { ButtonStyle } from "./style";
 
 const Button = ({ type, item, radioValue, typeSumSub }) => {
-  const { addToCart, removeFromCart, subtractFromBeerCart } =
+  const { addToCart, removeFromCart, subtractFromBeerCart, addUnitBeerToCart } =
     useContext(CartContext);
 
   const text = type === "catalogue" ? "Add to event" : "Remove from event";
@@ -12,7 +12,7 @@ const Button = ({ type, item, radioValue, typeSumSub }) => {
     if (type === "catalogue") {
       addToCart(item, radioValue);
     } else if (type !== "catalogue" && typeSumSub === "add") {
-      addToCart(item, type);
+      addUnitBeerToCart(item, type);
     } else if (type !== "catalogue" && typeSumSub === "sub") {
       subtractFromBeerCart(item, type);
     } else {

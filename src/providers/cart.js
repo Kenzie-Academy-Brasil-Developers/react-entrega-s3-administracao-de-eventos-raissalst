@@ -100,18 +100,24 @@ export const CartProvider = ({ children }) => {
 
   //função para adicionar +1 no carrinho
 
-  // const addUnitBeerToCart = (item) => {
-  //   return (item.quantity = item.quantity + 1);
-  // };
+  const addUnitBeerToCart = (item, type) => {
+    console.log("type no add +", type);
+    if (type === "cart") {
+      item.quantity = item.quantity + 1;
+      setCartFiltered([...cartFiltered]);
+    }
+  };
 
   //função para diminuir itens no carrinho
   const subtractFromBeerCart = (item, type) => {
     console.log("type no remove", type);
-    item.quantity = item.quantity - 1;
-    if (item.quantity === 0) {
-      removeFromCart(item, type);
-    } else {
-      setCartFiltered([...cartFiltered]);
+    if (type === "cart") {
+      item.quantity = item.quantity - 1;
+      if (item.quantity === 0) {
+        removeFromCart(item, type);
+      } else {
+        setCartFiltered([...cartFiltered]);
+      }
     }
   };
   // console.log("cart de volume no provider", cartVolume);
@@ -129,7 +135,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         subtractFromBeerCart,
-        // addUnitBeerToCart,
+        addUnitBeerToCart,
       }}
     >
       {children}
