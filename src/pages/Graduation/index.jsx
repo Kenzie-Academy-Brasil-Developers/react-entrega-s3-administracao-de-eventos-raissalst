@@ -35,7 +35,7 @@ const Graduation = () => {
   }));
 
   const classes = useStyles();
-  const { cart, cartFiltered, cartVolume } = useContext(CartContext);
+  const { cart, cartFiltered } = useContext(CartContext);
 
   return (
     <>
@@ -60,23 +60,18 @@ const Graduation = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cartFiltered.length[0] !== undefined
-                ? cartFiltered.map((beer, index) => (
-                    <TableRow key={index}>
-                      <TableCell component="th" scope="row">
-                        {beer.name}
-                      </TableCell>
-                      <TableCell align="right">
-                        {cartVolume[beer.id] * 20}
-                      </TableCell>
-                    </TableRow>
-                  ))
-                : null}
+              {!!cartFiltered &&
+                cartFiltered.map((beer) => (
+                  <TableRow key={beer.id}>
+                    <TableCell component="th" scope="row">
+                      {beer.name}
+                    </TableCell>
+                    <TableCell align="right">{beer.quantity * 20}</TableCell>
+                  </TableRow>
+                ))}
               <TableRow>
                 <TableCell className={classes.footer}>Total (L)</TableCell>
                 <TableCell className={classes.footer} align="right">
-                  {/* {cartVolume.reduce((acc, item) => acc + item * 20, 0)}
-                   */}
                   {cartFiltered.reduce(
                     (acc, item) => acc + item.quantity * 20,
                     0

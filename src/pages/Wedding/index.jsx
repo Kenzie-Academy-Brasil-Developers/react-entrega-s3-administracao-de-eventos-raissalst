@@ -4,11 +4,13 @@ import {
   HeaderContainerWed,
   ContainerTableWed,
 } from "./style";
-import { Table } from "@material-ui/core";
-import { TableBody } from "@material-ui/core";
-import { TableCell } from "@material-ui/core";
-import { TableHead } from "@material-ui/core";
-import { TableRow } from "@material-ui/core";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useContext } from "react";
 import { CartContext } from "../../providers/cart";
@@ -33,46 +35,15 @@ const Wedding = () => {
   }));
 
   const classes = useStyles();
-  const { cartWed } = useContext(CartContext);
+  const { cartWed, cartWedFiltered } = useContext(CartContext);
 
-  let newArraySortedWed = [];
-  let newArrayFilteredWed = [];
-  let idVolumesOfBeerWed = [];
-
-  if (cartWed.length !== 0) {
-    newArraySortedWed = cartWed.sort((a, b) => {
-      return a.id - b.id;
-    });
-
-    newArrayFilteredWed = [newArraySortedWed[0]];
-    let aux = "";
-
-    for (let i = 1; i < newArraySortedWed.length; i++) {
-      aux = newArraySortedWed[i - 1];
-      if (aux !== newArraySortedWed[i]) {
-        newArrayFilteredWed.push(newArraySortedWed[i]);
-      }
-    }
-
-    cartWed.forEach((item) => {
-      if (idVolumesOfBeerWed[item.id] === undefined) {
-        return (idVolumesOfBeerWed[item.id] = 1);
-      } else {
-        return (idVolumesOfBeerWed[item.id] = idVolumesOfBeerWed[item.id] + 1);
-      }
-    });
-  }
   return (
     <>
       <HeaderContainerWed>
         <h1>Casamento</h1>
       </HeaderContainerWed>
       <MainContainerBeerListWed>
-        <BeerListDisplay
-          type="cartWed"
-          arrayWed={newArrayFilteredWed}
-          qtityWed={idVolumesOfBeerWed}
-        />
+        <BeerListDisplay type="cartWed" />
       </MainContainerBeerListWed>
 
       <ContainerTableWed>
@@ -89,20 +60,22 @@ const Wedding = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {newArrayFilteredWed.map((beer, index) => (
-                <TableRow key={index}>
-                  <TableCell component="th" scope="row">
-                    {beer.name}
-                  </TableCell>
-                  <TableCell align="right">
-                    {idVolumesOfBeerWed[beer.id] * 20}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {!!cartWedFiltered &&
+                cartWedFiltered.map((beer) => (
+                  <TableRow key={beer.id}>
+                    <TableCell component="th" scope="row">
+                      {beer.name}
+                    </TableCell>
+                    <TableCell align="right">{beer.quantity * 20}</TableCell>
+                  </TableRow>
+                ))}
               <TableRow>
                 <TableCell className={classes.footer}>Total (L)</TableCell>
                 <TableCell className={classes.footer} align="right">
-                  {idVolumesOfBeerWed.reduce((acc, item) => acc + item * 20, 0)}
+                  {cartWedFiltered.reduce(
+                    (acc, item) => acc + item.quantity * 20,
+                    0
+                  )}
                 </TableCell>
               </TableRow>
             </TableBody>

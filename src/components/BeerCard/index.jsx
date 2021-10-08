@@ -18,7 +18,7 @@ const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
   const { id, image_url, name, first_brewed, description, volume } = beer;
   const [open, setOpen] = useState(false);
   const [radioValue, setRadioValue] = useState("");
-  const { cartVolume } = useContext(CartContext);
+  // const { cartVolume } = useContext(CartContext);
 
   const handleClickOpenDescrip = () => {
     setOpen(true);
@@ -81,9 +81,16 @@ const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
         </div>
       )}
       {type === "cartWed" && (
-        <h4>
-          Qtdade: {qtityWed} x {volume.value}L
-        </h4>
+        <div className="counterContainer">
+          <Button type={type} item={beer} typeSumSub={"sub"}>
+            -
+          </Button>
+
+          <p>{beer.quantity}</p>
+          <Button type={type} item={beer} typeSumSub={"add"}>
+            +
+          </Button>
+        </div>
       )}
       {type === "cartGather" && (
         <h4>

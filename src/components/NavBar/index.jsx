@@ -1,9 +1,8 @@
-import { AppBar, Toolbar, MenuItem } from "@material-ui/core";
+import { AppBar, Toolbar, MenuItem, Badge } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useHistory } from "react-router";
 import { FaGraduationCap } from "react-icons/fa";
 import { GiLovers, GiPartyPopper } from "react-icons/gi";
-import { Badge } from "@material-ui/core";
 import { useContext } from "react";
 import { CartContext } from "../../providers/cart";
 
@@ -23,7 +22,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NavBar = () => {
-  const { cartFiltered } = useContext(CartContext);
+  const { cartFiltered, cartWedFiltered } = useContext(CartContext);
   const classes = useStyles();
 
   const history = useHistory();
@@ -33,6 +32,10 @@ const NavBar = () => {
   };
 
   let totalCart = cartFiltered.reduce((acc, item) => acc + item.quantity, 0);
+  let totalCartWed = cartWedFiltered.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
   return (
     <>
       <AppBar className={classes.appbar} position="fixed">
@@ -49,7 +52,9 @@ const NavBar = () => {
             </Badge>
           </MenuItem>
           <MenuItem className={classes.item} onClick={() => sendTo("/wedding")}>
-            <GiLovers />
+            <Badge badgeContent={totalCartWed} color="secondary">
+              <GiLovers />
+            </Badge>
           </MenuItem>
           <MenuItem
             className={classes.item}
