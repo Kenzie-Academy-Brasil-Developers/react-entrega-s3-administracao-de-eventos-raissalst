@@ -33,50 +33,46 @@ const Graduation = () => {
   }));
 
   const classes = useStyles();
-  const { cart } = useContext(CartContext);
+  const { cart, cartFiltered, cartVolume } = useContext(CartContext);
 
   //filtrando o array original para tirar repetidos
   //primeiro sort depois filter
-  let newArraySortedGrad = [];
-  let newArrayFilteredGrad = [];
-  let idVolumesOfBeerGrad = [];
+  // let newArraySortedGrad = [];
+  // let newArrayFilteredGrad = [];
+  // let idVolumesOfBeerGrad = [];
 
-  if (cart.length !== 0) {
-    newArraySortedGrad = cart.sort((a, b) => {
-      return a.id - b.id;
-    });
+  // if (cart.length !== 0) {
+  //   newArraySortedGrad = cart.sort((a, b) => {
+  //     return a.id - b.id;
+  //   });
 
-    newArrayFilteredGrad = [newArraySortedGrad[0]];
-    let aux = "";
+  //   newArrayFilteredGrad = [newArraySortedGrad[0]];
+  //   let aux = "";
 
-    for (let i = 1; i < newArraySortedGrad.length; i++) {
-      aux = newArraySortedGrad[i - 1];
-      if (aux !== newArraySortedGrad[i]) {
-        newArrayFilteredGrad.push(newArraySortedGrad[i]);
-      }
-    }
+  //   for (let i = 1; i < newArraySortedGrad.length; i++) {
+  //     aux = newArraySortedGrad[i - 1];
+  //     if (aux !== newArraySortedGrad[i]) {
+  //       newArrayFilteredGrad.push(newArraySortedGrad[i]);
+  //     }
+  //   }
 
-    cart.forEach((item) => {
-      if (idVolumesOfBeerGrad[item.id] === undefined) {
-        return (idVolumesOfBeerGrad[item.id] = 1);
-      } else {
-        return (idVolumesOfBeerGrad[item.id] =
-          idVolumesOfBeerGrad[item.id] + 1);
-      }
-    });
-  }
-
+  //   cart.forEach((item) => {
+  //     if (idVolumesOfBeerGrad[item.id] === undefined) {
+  //       return (idVolumesOfBeerGrad[item.id] = 1);
+  //     } else {
+  //       return (idVolumesOfBeerGrad[item.id] =
+  //         idVolumesOfBeerGrad[item.id] + 1);
+  //     }
+  //   });
+  // }
+  console.log(cartFiltered);
   return (
     <>
       <HeaderContainerGrad>
         <h1>Formatura</h1>
       </HeaderContainerGrad>
       <MainContainerBeerListGrad>
-        <BeerListDisplay
-          type="cart"
-          arrayGrad={newArrayFilteredGrad}
-          qtityGrad={idVolumesOfBeerGrad}
-        />
+        <BeerListDisplay type="cart" />
       </MainContainerBeerListGrad>
 
       <ContainerTableGrad>
@@ -93,23 +89,22 @@ const Graduation = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {newArrayFilteredGrad.map((beer, index) => (
-                <TableRow key={index}>
-                  <TableCell component="th" scope="row">
-                    {beer.name}
-                  </TableCell>
-                  <TableCell align="right">
-                    {idVolumesOfBeerGrad[beer.id] * 20}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {cartFiltered.length[0] !== undefined
+                ? cartFiltered.map((beer, index) => (
+                    <TableRow key={index}>
+                      <TableCell component="th" scope="row">
+                        {beer.name}
+                      </TableCell>
+                      <TableCell align="right">
+                        {cartVolume[beer.id] * 20}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                : null}
               <TableRow>
                 <TableCell className={classes.footer}>Total (L)</TableCell>
                 <TableCell className={classes.footer} align="right">
-                  {idVolumesOfBeerGrad.reduce(
-                    (acc, item) => acc + item * 20,
-                    0
-                  )}
+                  {cartVolume.reduce((acc, item) => acc + item * 20, 0)}
                 </TableCell>
               </TableRow>
             </TableBody>

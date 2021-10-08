@@ -11,11 +11,14 @@ import { GiClick } from "react-icons/gi";
 import { GiLovers } from "react-icons/gi";
 import { FaGraduationCap } from "react-icons/fa";
 import { GiPartyPopper } from "react-icons/gi";
+import { CartContext } from "../../providers/cart";
+import { useContext } from "react";
 
-const BeerCard = ({ beer, type, qtityGrad, qtityWed, qtityGather }) => {
-  const { image_url, name, first_brewed, description, volume } = beer;
+const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
+  const { id, image_url, name, first_brewed, description, volume } = beer;
   const [open, setOpen] = useState(false);
   const [radioValue, setRadioValue] = useState("");
+  const { cartVolume } = useContext(CartContext);
 
   const handleClickOpenDescrip = () => {
     setOpen(true);
@@ -64,7 +67,7 @@ const BeerCard = ({ beer, type, qtityGrad, qtityWed, qtityGather }) => {
       {type === "catalogue" && <h4>Qtdade: {volume.value}L</h4>}
       {type === "cart" && (
         <h4>
-          Qtdade: {qtityGrad} x {volume.value}L
+          Qtdade: {cartVolume[id]} x {volume.value}L
         </h4>
       )}
       {type === "cartWed" && (
