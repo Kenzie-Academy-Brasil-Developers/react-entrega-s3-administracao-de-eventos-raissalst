@@ -3,120 +3,110 @@ import toast from "react-hot-toast";
 export const CartContext = createContext([]);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [cartWed, setCartWed] = useState([]);
-  const [cartGather, setCartGather] = useState([]);
+  // const [cart, setCart] = useState([]);
+  // const [cartWed, setCartWed] = useState([]);
+  // const [cartGather, setCartGather] = useState([]);
   const [cartFiltered, setCartFiltered] = useState([]);
   const [cartWedFiltered, setCartWedFiltered] = useState([]);
-  // const [cartGatherFiltered, setCartGatherFiltered] = useState([]);
+  const [cartGatherFiltered, setCartGatherFiltered] = useState([]);
 
-  // const [cartVolume, setCartVolume] = useState([]);
-  const [cartWedVolume, setCartWedVolume] = useState([]);
-  // const [cartGatherVolume, setCartGatherVolume] = useState([]);
-
-  // const [addMessage, setAddMessage] = useState(false);
   const notifyAdd = () => toast.success("Produto adicionado com sucesso!");
 
-  const createArrayOfBeerVolume = (array) => {
-    let auxArray = [];
-    array.forEach((item) => {
-      if (auxArray[item.id] === undefined) {
-        return (auxArray[item.id] = 1);
-      } else {
-        return (auxArray[item.id] = auxArray[item.id] + 1);
-      }
-    });
-    // console.log("aux array no volume", auxArray);
-    return auxArray;
-  };
+  const newFilteringArray = (array, item) => {
+    let findItemPos = array.findIndex((beer) => beer.id === item.id);
 
-  const filteringArray = (array) => {
-    // console.log("array na funcao", array);
-    let newSorted = [];
-    newSorted = array.sort((a, b) => {
-      return a.id - b.id;
-    });
-    // console.log("new sorted", newSorted);
-    let newFiltered = [newSorted[0]];
-    let aux = "";
-    for (let i = 1; i < newSorted.length; i++) {
-      aux = newSorted[i - 1];
-      if (aux !== newSorted[i]) {
-        newFiltered.push(newSorted[i]);
-      }
+    if (findItemPos === -1) {
+      item.quantity = item.quantity + 1;
+      array.push(item);
+      console.log(array);
+      return array;
     }
-    // console.log("new filtered na funcao", newFiltered);
-    return newFiltered[0] ? newFiltered : [];
+
+    if (findItemPos !== -1) {
+      console.log(array[findItemPos].quantity);
+      array[findItemPos].quantity = array[findItemPos].quantity + 1;
+      console.log(array[findItemPos].quantity);
+      console.log(array);
+      return array;
+    }
   };
 
   let newArrayAuxCart = [];
   let newArrayAuxCartWed = [];
+  let newArrayAuxCartGather = [];
+  let itemGrad = "";
+  let itemWed = "";
+  let itemGather = "";
 
   const addToCart = (item, radioValue) => {
-    // console.log(item);
     if (radioValue === "Graduation") {
-      setCart([...cart, item]);
-      item.quantity = item.quantity + 1;
-      newArrayAuxCart = [...cart, item];
-      if (newArrayAuxCart.length !== 0) {
-        setCartFiltered(filteringArray(newArrayAuxCart));
+      itemGrad = { ...item }; //copiei o item
+      newArrayAuxCart = [...cartFiltered]; //copiei o state filtrado
+      //se o array estiver totalmente vazio
+      if (newArrayAuxCart.length === 0) {
+        itemGrad.quantity = itemGrad.quantity + 1;
+        return setCartFiltered([...cartFiltered, itemGrad]);
       }
-      // console.log("new array no add to cart", newArrayAuxCart);
-      // setCartVolume(createArrayOfBeerVolume(newArrayAuxCart));
+      return setCartFiltered(newFilteringArray(newArrayAuxCart, itemGrad));
     }
 
     if (radioValue === "Wedding") {
-      setCartWed([...cartWed, item]);
-      item.quantity = item.quantity + 1;
-      newArrayAuxCartWed = [...cartWed, item];
-      if (newArrayAuxCartWed.length !== 0) {
-        setCartWedFiltered(filteringArray(newArrayAuxCartWed));
+      itemWed = { ...item };
+      newArrayAuxCartWed = [...cartWedFiltered];
+
+      if (cartWedFiltered.length === 0) {
+        itemWed.quantity = itemWed.quantity + 1;
+        return setCartWedFiltered([...cartWedFiltered, itemWed]);
       }
-      // console.log("new array no add to cart", newArrayAuxCart);
-      // setCartWedVolume(createArrayOfBeerVolume(newArrayAuxCartWed));
+      return setCartWedFiltered(newFilteringArray(newArrayAuxCartWed, itemWed));
     }
 
     if (radioValue === "Gathering") {
-      setCartGather([...cartGather, item]);
+      itemGather = { ...item };
+      newArrayAuxCartGather = [...cartGatherFiltered];
+
+      if (cartGatherFiltered.length === 0) {
+        itemGather.quantity = itemGather.quantity + 1;
+        return setCartGatherFiltered([...cartGatherFiltered, itemGather]);
+      }
+      return setCartGatherFiltered(
+        newFilteringArray(newArrayAuxCartGather, itemGather)
+      );
     }
   };
 
   const removeFromCart = (item, type) => {
-    // console.log("type no remove", type);
     if (type === "cart") {
-      const newCart = cart.filter(
+      item.quantity = 0;
+      const newCart = cartFiltered.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
-      setCart(newCart);
-      setCartFiltered(filteringArray(newCart));
-      // console.log("new cart dentro do remove", newCart);
-
-      // setCartVolume(createArrayOfBeerVolume(newCart));
+      // setCart(newCart);
+      console.log("new cart", newCart);
+      setCartFiltered(newCart);
     }
 
     if (type === "cartWed") {
-      const newCartWed = cartWed.filter(
+      item.quantity = 0;
+      const newCartWed = cartWedFiltered.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
-      setCartWed(newCartWed);
-      setCartWedFiltered(filteringArray(newCartWed));
-      // console.log("new cart dentro do remove", newCart);
-
-      // setCartWedVolume(createArrayOfBeerVolume(newCartWed));
+      // setCartWed(newCartWed);
+      setCartWedFiltered(newCartWed);
     }
 
     if (type === "cartGather") {
-      const newCartGather = cartGather.filter(
+      item.quantity = 0;
+      const newCartGather = cartGatherFiltered.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
-      setCartGather(newCartGather);
+      // setCartGather(newCartGather);
+      setCartGatherFiltered(newCartGather);
     }
   };
 
   //função para adicionar +1 no carrinho
-
   const addUnitBeerToCart = (item, type) => {
-    // console.log("type no add +", type);
     if (type === "cart") {
       item.quantity = item.quantity + 1;
       setCartFiltered([...cartFiltered]);
@@ -126,11 +116,17 @@ export const CartProvider = ({ children }) => {
       item.quantity = item.quantity + 1;
       setCartWedFiltered([...cartWedFiltered]);
     }
+
+    if (type === "cartGather") {
+      item.quantity = item.quantity + 1;
+      setCartGatherFiltered([...cartGatherFiltered]);
+    }
   };
 
-  //função para diminuir itens no carrinho
+  //função para subtrair -1 no carrinho
   const subtractFromBeerCart = (item, type) => {
-    // console.log("type no remove", type);
+    console.log(type);
+    // console.log(item);
     if (type === "cart") {
       item.quantity = item.quantity - 1;
       if (item.quantity === 0) {
@@ -148,20 +144,29 @@ export const CartProvider = ({ children }) => {
         setCartWedFiltered([...cartWedFiltered]);
       }
     }
+
+    if (type === "cartGather") {
+      item.quantity = item.quantity - 1;
+      if (item.quantity === 0) {
+        removeFromCart(item, type);
+      } else {
+        setCartGatherFiltered([...cartGatherFiltered]);
+      }
+    }
   };
   // console.log("cart de volume no provider", cartVolume);
   // console.log("cart sem filtro no provider", cart);
-  // console.log("cart com filtro no provider", cartFiltered);
+  console.log("cart com filtro no provider", cartFiltered);
 
   return (
     <CartContext.Provider
       value={{
-        cart,
+        // cart,
         cartFiltered,
-        // cartVolume,
-        cartWed,
+        // cartWed,
         cartWedFiltered,
-        cartGather,
+        // cartGather,
+        cartGatherFiltered,
         addToCart,
         removeFromCart,
         subtractFromBeerCart,

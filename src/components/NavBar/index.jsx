@@ -22,7 +22,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NavBar = () => {
-  const { cartFiltered, cartWedFiltered } = useContext(CartContext);
+  const { cartFiltered, cartWedFiltered, cartGatherFiltered } =
+    useContext(CartContext);
   const classes = useStyles();
 
   const history = useHistory();
@@ -30,9 +31,15 @@ const NavBar = () => {
   const sendTo = (path) => {
     history.push(path);
   };
-
-  let totalCart = cartFiltered.reduce((acc, item) => acc + item.quantity, 0);
+  let totalCart = "";
+  if (cartFiltered) {
+    totalCart = cartFiltered.reduce((acc, item) => acc + item.quantity, 0);
+  }
   let totalCartWed = cartWedFiltered.reduce(
+    (acc, item) => acc + item.quantity,
+    0
+  );
+  let totalCartGather = cartGatherFiltered.reduce(
     (acc, item) => acc + item.quantity,
     0
   );
@@ -60,7 +67,9 @@ const NavBar = () => {
             className={classes.item}
             onClick={() => sendTo("/gathering")}
           >
-            <GiPartyPopper />
+            <Badge badgeContent={totalCartGather} color="secondary">
+              <GiPartyPopper />
+            </Badge>
           </MenuItem>
         </Toolbar>
       </AppBar>

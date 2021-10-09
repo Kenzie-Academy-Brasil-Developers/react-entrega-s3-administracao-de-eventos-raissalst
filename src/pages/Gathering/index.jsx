@@ -4,11 +4,13 @@ import {
   HeaderContainerGather,
   MainContainerBeerListGather,
 } from "./style";
-import { Table } from "@material-ui/core";
-import { TableBody } from "@material-ui/core";
-import { TableCell } from "@material-ui/core";
-import { TableHead } from "@material-ui/core";
-import { TableRow } from "@material-ui/core";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { useContext } from "react";
 import { CartContext } from "../../providers/cart";
@@ -33,36 +35,7 @@ const Gathering = () => {
   }));
 
   const classes = useStyles();
-  const { cartGather } = useContext(CartContext);
-
-  let newArraySortedGather = [];
-  let newArrayFilteredGather = [];
-  let idVolumesOfBeerGather = [];
-
-  if (cartGather.length !== 0) {
-    newArraySortedGather = cartGather.sort((a, b) => {
-      return a.id - b.id;
-    });
-
-    newArrayFilteredGather = [newArraySortedGather[0]];
-    let aux = "";
-
-    for (let i = 1; i < newArraySortedGather.length; i++) {
-      aux = newArraySortedGather[i - 1];
-      if (aux !== newArraySortedGather[i]) {
-        newArrayFilteredGather.push(newArraySortedGather[i]);
-      }
-    }
-
-    cartGather.forEach((item) => {
-      if (idVolumesOfBeerGather[item.id] === undefined) {
-        return (idVolumesOfBeerGather[item.id] = 1);
-      } else {
-        return (idVolumesOfBeerGather[item.id] =
-          idVolumesOfBeerGather[item.id] + 1);
-      }
-    });
-  }
+  const { cartGatherFiltered } = useContext(CartContext);
 
   return (
     <>
@@ -71,17 +44,13 @@ const Gathering = () => {
       </HeaderContainerGather>
 
       <MainContainerBeerListGather>
-        <BeerListDisplay
-          type="cartGather"
-          arrayGather={newArrayFilteredGather}
-          qtityGather={idVolumesOfBeerGather}
-        />
+        <BeerListDisplay type="cartGather" />
       </MainContainerBeerListGather>
 
       <ContainerTableGather>
         <h5>Resumo do Pedido</h5>
 
-        {cartGather && (
+        {cartGatherFiltered && (
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
@@ -92,21 +61,20 @@ const Gathering = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {newArrayFilteredGather.map((beer, index) => (
-                <TableRow key={index}>
-                  <TableCell component="th" scope="row">
-                    {beer.name}
-                  </TableCell>
-                  <TableCell align="right">
-                    {idVolumesOfBeerGather[beer.id] * 20}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {!!cartGatherFiltered &&
+                cartGatherFiltered.map((beer) => (
+                  <TableRow key={beer.id}>
+                    <TableCell component="th" scope="row">
+                      {beer.name}
+                    </TableCell>
+                    <TableCell align="right">{beer.quantity * 20}</TableCell>
+                  </TableRow>
+                ))}
               <TableRow>
                 <TableCell className={classes.footer}>Total (L)</TableCell>
                 <TableCell className={classes.footer} align="right">
-                  {idVolumesOfBeerGather.reduce(
-                    (acc, item) => acc + item * 20,
+                  {cartGatherFiltered.reduce(
+                    (acc, item) => acc + item.quantity * 20,
                     0
                   )}
                 </TableCell>

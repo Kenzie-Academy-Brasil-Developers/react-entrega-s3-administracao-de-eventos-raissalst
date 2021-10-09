@@ -35,7 +35,7 @@ const Wedding = () => {
   }));
 
   const classes = useStyles();
-  const { cartWed, cartWedFiltered } = useContext(CartContext);
+  const { cartWedFiltered } = useContext(CartContext);
 
   return (
     <>
@@ -49,7 +49,7 @@ const Wedding = () => {
       <ContainerTableWed>
         <h5>Resumo do Pedido</h5>
 
-        {cartWed && (
+        {cartWedFiltered && (
           <Table className={classes.table}>
             <TableHead>
               <TableRow>

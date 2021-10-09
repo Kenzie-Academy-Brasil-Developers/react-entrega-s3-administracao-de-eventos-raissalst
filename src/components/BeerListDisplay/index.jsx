@@ -4,10 +4,12 @@ import { CartContext } from "../../providers/cart";
 import { ListContainerBeerDisplay } from "./style";
 import BeerCard from "../BeerCard";
 
-const BeerListDisplay = ({ type, arrayGather, qtityGather }) => {
+const BeerListDisplay = ({ type }) => {
   const { beerList } = useContext(BeerListContext);
-  const { cartFiltered, cartWedFiltered, cartGather } = useContext(CartContext);
-  // console.log("cart filtered", cartFiltered);
+  const { cartFiltered, cartWedFiltered, cartGatherFiltered } =
+    useContext(CartContext);
+
+  console.log(cartFiltered);
 
   return (
     <ListContainerBeerDisplay>
@@ -29,15 +31,10 @@ const BeerListDisplay = ({ type, arrayGather, qtityGather }) => {
           <BeerCard key={beer.id} beer={beer} type={type} />
         ))}
 
-      {!!cartGather &&
+      {!!cartGatherFiltered &&
         type === "cartGather" &&
-        arrayGather.map((beer, index) => (
-          <BeerCard
-            key={index}
-            beer={beer}
-            type={type}
-            qtityGather={qtityGather[beer.id]}
-          />
+        cartGatherFiltered.map((beer) => (
+          <BeerCard key={beer.id} beer={beer} type={type} />
         ))}
     </ListContainerBeerDisplay>
   );

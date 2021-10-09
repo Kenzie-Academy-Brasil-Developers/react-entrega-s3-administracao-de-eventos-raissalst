@@ -1,6 +1,5 @@
 import Button from "../Button";
-import { useState, useContext } from "react";
-import { CartContext } from "../../providers/cart";
+import { useState } from "react";
 import { ItemLiContainer } from "./style";
 import Box from "@material-ui/core/Box";
 import {
@@ -14,11 +13,10 @@ import { makeStyles } from "@material-ui/styles";
 import { GiClick, GiLovers, GiPartyPopper } from "react-icons/gi";
 import { FaGraduationCap } from "react-icons/fa";
 
-const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
-  const { id, image_url, name, first_brewed, description, volume } = beer;
+const BeerCard = ({ beer, type }) => {
+  const { image_url, name, first_brewed, description, volume } = beer;
   const [open, setOpen] = useState(false);
   const [radioValue, setRadioValue] = useState("");
-  // const { cartVolume } = useContext(CartContext);
 
   const handleClickOpenDescrip = () => {
     setOpen(true);
@@ -52,7 +50,6 @@ const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
     },
   }));
 
-  // console.log("state do radio", radioValue);
   const classes = useStyles();
 
   return (
@@ -66,9 +63,6 @@ const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
       )}
       {type === "catalogue" && <h4>Qtdade: {volume.value}L</h4>}
       {type === "cart" && (
-        // <h4>
-        //   Qtdade: {cartVolume[id]} x {volume.value}L
-        // </h4>
         <div className="counterContainer">
           <Button type={type} item={beer} typeSumSub={"sub"}>
             -
@@ -93,9 +87,16 @@ const BeerCard = ({ beer, type, qtityWed, qtityGather }) => {
         </div>
       )}
       {type === "cartGather" && (
-        <h4>
-          Qtdade: {qtityGather} x {volume.value}L
-        </h4>
+        <div className="counterContainer">
+          <Button type={type} item={beer} typeSumSub={"sub"}>
+            -
+          </Button>
+
+          <p>{beer.quantity}</p>
+          <Button type={type} item={beer} typeSumSub={"add"}>
+            +
+          </Button>
+        </div>
       )}
 
       {type === "catalogue" && (

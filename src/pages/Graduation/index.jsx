@@ -35,7 +35,7 @@ const Graduation = () => {
   }));
 
   const classes = useStyles();
-  const { cart, cartFiltered } = useContext(CartContext);
+  const { cartFiltered } = useContext(CartContext);
 
   return (
     <>
@@ -49,7 +49,7 @@ const Graduation = () => {
       <ContainerTableGrad>
         <h5>Resumo do Pedido</h5>
 
-        {cart && (
+        {cartFiltered && (
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
