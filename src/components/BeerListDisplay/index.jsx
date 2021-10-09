@@ -9,8 +9,6 @@ const BeerListDisplay = ({ type }) => {
   const { cartFiltered, cartWedFiltered, cartGatherFiltered } =
     useContext(CartContext);
 
-  console.log(cartFiltered);
-
   return (
     <ListContainerBeerDisplay>
       {!!beerList &&

@@ -3,9 +3,6 @@ import toast from "react-hot-toast";
 export const CartContext = createContext([]);
 
 export const CartProvider = ({ children }) => {
-  // const [cart, setCart] = useState([]);
-  // const [cartWed, setCartWed] = useState([]);
-  // const [cartGather, setCartGather] = useState([]);
   const [cartFiltered, setCartFiltered] = useState([]);
   const [cartWedFiltered, setCartWedFiltered] = useState([]);
   const [cartGatherFiltered, setCartGatherFiltered] = useState([]);
@@ -18,15 +15,11 @@ export const CartProvider = ({ children }) => {
     if (findItemPos === -1) {
       item.quantity = item.quantity + 1;
       array.push(item);
-      console.log(array);
       return array;
     }
 
     if (findItemPos !== -1) {
-      console.log(array[findItemPos].quantity);
       array[findItemPos].quantity = array[findItemPos].quantity + 1;
-      console.log(array[findItemPos].quantity);
-      console.log(array);
       return array;
     }
   };
@@ -40,9 +33,9 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item, radioValue) => {
     if (radioValue === "Graduation") {
-      itemGrad = { ...item }; //copiei o item
-      newArrayAuxCart = [...cartFiltered]; //copiei o state filtrado
-      //se o array estiver totalmente vazio
+      itemGrad = { ...item };
+      newArrayAuxCart = [...cartFiltered];
+
       if (newArrayAuxCart.length === 0) {
         itemGrad.quantity = itemGrad.quantity + 1;
         return setCartFiltered([...cartFiltered, itemGrad]);
@@ -81,8 +74,7 @@ export const CartProvider = ({ children }) => {
       const newCart = cartFiltered.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
-      // setCart(newCart);
-      console.log("new cart", newCart);
+
       setCartFiltered(newCart);
     }
 
@@ -91,7 +83,7 @@ export const CartProvider = ({ children }) => {
       const newCartWed = cartWedFiltered.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
-      // setCartWed(newCartWed);
+
       setCartWedFiltered(newCartWed);
     }
 
@@ -100,7 +92,7 @@ export const CartProvider = ({ children }) => {
       const newCartGather = cartGatherFiltered.filter(
         (itemOnCart) => itemOnCart.name !== item.name
       );
-      // setCartGather(newCartGather);
+
       setCartGatherFiltered(newCartGather);
     }
   };
@@ -125,8 +117,6 @@ export const CartProvider = ({ children }) => {
 
   //função para subtrair -1 no carrinho
   const subtractFromBeerCart = (item, type) => {
-    console.log(type);
-    // console.log(item);
     if (type === "cart") {
       item.quantity = item.quantity - 1;
       if (item.quantity === 0) {
@@ -154,18 +144,12 @@ export const CartProvider = ({ children }) => {
       }
     }
   };
-  // console.log("cart de volume no provider", cartVolume);
-  // console.log("cart sem filtro no provider", cart);
-  console.log("cart com filtro no provider", cartFiltered);
 
   return (
     <CartContext.Provider
       value={{
-        // cart,
         cartFiltered,
-        // cartWed,
         cartWedFiltered,
-        // cartGather,
         cartGatherFiltered,
         addToCart,
         removeFromCart,
